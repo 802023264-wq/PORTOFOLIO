@@ -3,82 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eka Wahyu Maulidan — Portofolio</title>
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Nama Anda | Portofolio</title>
+    <!-- Font Plus Jakarta Sans & JetBrains Mono untuk kesan developer modern -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Ikon Lucide / FontAwesome CDN untuk ikon sosial media & UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #111827;
-            --card-hover: #1f2937;
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --border: #1f2937;
+            --bg-main: #09090b;
+            --bg-card: rgba(24, 24, 27, 0.65);
+            --bg-card-hover: rgba(39, 39, 42, 0.85);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(56, 189, 248, 0.4);
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.15);
+            --gradient-text: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+            --gradient-accent: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-main);
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
             overflow-x: hidden;
         }
 
-        /* Header / Navigasi */
-        header {
-            width: 100%;
-            max-width: 800px;
-            padding: 1.5rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
+        /* Efek Grid & Cahaya Latar Belakang (khas website portofolio Vercel/Next.js) */
+        body::before {
+            content: "";
+            position: fixed;
             top: 0;
-            background-color: rgba(11, 15, 25, 0.85);
-            backdrop-filter: blur(12px);
-            z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+            pointer-events: none;
         }
 
-        .logo {
+        .glow-orb {
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(129, 140, 248, 0.05) 45%, transparent 70%);
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Floating Navbar Kapsul */
+        header {
+            position: sticky;
+            top: 1.25rem;
+            z-index: 100;
+            width: 100%;
+            max-width: 820px;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-pill {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: rgba(18, 18, 21, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 0.65rem 0.5rem 1.25rem;
+            border-radius: 9999px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+        }
+
+        .brand {
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: var(--text-primary);
-            text-decoration: none;
+            letter-spacing: -0.3px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .logo span {
-            color: var(--accent);
+        .brand-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
         }
 
         nav {
             display: flex;
             gap: 0.25rem;
-            background: rgba(31, 41, 55, 0.5);
-            padding: 0.25rem;
-            border-radius: 9999px;
-            border: 1px solid var(--border);
         }
 
         .tab-btn {
             background: transparent;
             border: none;
             color: var(--text-secondary);
-            padding: 0.45rem 1rem;
+            padding: 0.45rem 0.95rem;
             border-radius: 9999px;
             cursor: pointer;
             font-size: 0.85rem;
@@ -88,266 +134,438 @@
 
         .tab-btn:hover {
             color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.04);
         }
 
         .tab-btn.active {
-            background-color: var(--text-primary);
-            color: var(--bg-color);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
             font-weight: 600;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
-        /* Konten Utama */
+        /* Kontainer Utama */
         main {
             width: 100%;
-            max-width: 800px;
-            padding: 3rem 1.25rem;
+            max-width: 820px;
+            padding: 4rem 1.25rem 3rem;
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .tab-content {
             display: none;
-            animation: fadeIn 0.35s ease forwards;
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .tab-content.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(14px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Home Section */
-        .hero {
-            padding: 2rem 0;
+        /* ================= TAB 1: HOME ================= */
+        .hero-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 1.5rem 0;
         }
 
-        .hero-badge {
+        .status-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent);
             padding: 0.35rem 0.85rem;
             border-radius: 9999px;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: var(--accent);
             font-size: 0.8rem;
             font-weight: 500;
+            margin-bottom: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        .hero-greeting {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-role {
+            font-size: 1.35rem;
+            font-weight: 600;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 1.25rem;
-            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
-        .hero h1 {
-            font-size: 2.75rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero p {
+        .hero-desc {
             color: var(--text-secondary);
             font-size: 1.05rem;
-            line-height: 1.7;
-            max-width: 650px;
-            margin-bottom: 2rem;
+            line-height: 1.75;
+            max-width: 640px;
+            margin-bottom: 2.25rem;
         }
 
-        .hero-actions {
+        .hero-cta-group {
             display: flex;
+            flex-wrap: wrap;
+            align-items: center;
             gap: 1rem;
         }
 
-        .btn {
-            padding: 0.7rem 1.4rem;
-            border-radius: 8px;
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-main);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
             font-size: 0.9rem;
             font-weight: 600;
+            border: none;
             cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background-color: var(--text-primary);
-            color: var(--bg-color);
-            border: none;
+            transition: all 0.2s ease;
         }
 
         .btn-primary:hover {
-            background-color: #e5e7eb;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -6px rgba(255, 255, 255, 0.3);
         }
 
-        .btn-outline {
-            background: transparent;
+        .btn-secondary {
+            background: var(--bg-card);
             color: var(--text-primary);
-            border: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
         }
 
-        .btn-outline:hover {
-            background: var(--card-bg);
-            border-color: var(--text-secondary);
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* Portfolio Section */
-        .section-header {
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 2.5rem;
+            padding-top: 1.75rem;
+            border-top: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+        }
+
+        .social-icon:hover {
+            color: var(--text-primary);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* ================= TAB 2: PORTFOLIO ================= */
+        .section-heading {
             margin-bottom: 2rem;
         }
 
-        .section-header h2 {
-            font-size: 1.75rem;
+        .section-heading span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-heading h2 {
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.75px;
+            margin-top: 0.25rem;
         }
 
-        .section-header p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .grid-projects {
+        .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 1.25rem;
         }
 
         .project-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.25s ease;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px -15px rgba(56, 189, 248, 0.15);
         }
 
-        .project-card h3 {
-            font-size: 1.1rem;
+        .project-banner {
+            height: 160px;
+            background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-banner i {
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .project-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-body h3 {
+            font-size: 1.15rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
-        .project-card p {
+        .project-body p {
             color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.6;
             margin-bottom: 1.25rem;
+            flex: 1;
         }
 
-        .tech-tags {
+        .badge-list {
             display: flex;
             flex-wrap: wrap;
             gap: 0.4rem;
             margin-bottom: 1.25rem;
         }
 
-        .tech-tag {
-            background: rgba(255, 255, 255, 0.05);
+        .tech-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             color: var(--text-secondary);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 500;
         }
 
-        .project-link {
-            color: var(--accent);
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .project-links a {
+            color: var(--text-primary);
             text-decoration: none;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: 0.4rem;
+            transition: color 0.2s;
         }
 
-        .project-link:hover {
-            text-decoration: underline;
+        .project-links a:hover {
+            color: var(--accent);
         }
 
-        /* About Section */
-        .about-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+        /* ================= TAB 3: ABOUT ME ================= */
+        .about-bento {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
         }
 
-        .about-box {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+        .bento-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
             padding: 1.75rem;
         }
 
-        .about-box h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
+        .bento-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .about-box p {
+        .bento-card h3 i {
+            color: var(--accent);
+        }
+
+        .bento-card p {
             color: var(--text-secondary);
             font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 1rem;
+            line-height: 1.75;
+            margin-bottom: 0.85rem;
         }
 
-        .skills-grid {
+        .skills-wrapper {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
         }
 
-        .skill-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
+        .skill-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.5rem 0.9rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             font-size: 0.85rem;
             color: var(--text-primary);
+            transition: border-color 0.2s;
         }
 
-        /* Contact Section */
-        .contact-container {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            max-width: 600px;
+        .skill-chip:hover {
+            border-color: var(--accent);
         }
 
-        .form-group {
+        /* ================= TAB 4: CONTACT ================= */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 1.5rem;
+        }
+
+        .contact-info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
             margin-bottom: 1.25rem;
         }
 
-        .form-group label {
+        .contact-item i {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-top: 0.2rem;
+        }
+
+        .contact-item h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-item p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .contact-form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.1rem;
+        }
+
+        .input-group label {
             display: block;
             font-size: 0.85rem;
             color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
+            margin-bottom: 0.45rem;
         }
 
-        .form-group input, 
-        .form-group textarea {
+        .input-group input,
+        .input-group textarea {
             width: 100%;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border);
-            padding: 0.75rem;
-            border-radius: 8px;
+            background: rgba(9, 9, 11, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
             color: var(--text-primary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
         }
 
-        .form-group input:focus, 
-        .form-group textarea:focus {
+        .input-group input:focus,
+        .input-group textarea:focus {
             outline: none;
             border-color: var(--accent);
         }
@@ -355,169 +573,268 @@
         /* Footer */
         footer {
             width: 100%;
-            max-width: 800px;
-            padding: 2rem 1.25rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 820px;
+            padding: 1.75rem 1.25rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             color: var(--text-secondary);
-            font-size: 0.85rem;
-            text-align: center;
+            font-size: 0.82rem;
         }
 
-        /* Responsif */
-        @media(max-width: 640px) {
-            header {
+        /* Responsif Mobile */
+        @media (max-width: 680px) {
+            .nav-pill {
                 flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
+                border-radius: 20px;
+                padding: 0.75rem;
+                gap: 0.65rem;
             }
-            .hero h1 {
-                font-size: 2.1rem;
+            .tab-btn {
+                padding: 0.4rem 0.7rem;
+                font-size: 0.8rem;
+            }
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            footer {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
 
+    <div class="glow-orb"></div>
+
+    <!-- Header Navigasi Kapsul -->
     <header>
-        <a href="#" class="logo" onclick="switchTab('home', event)">Eka Wahyu<span>.</span></a>
-        <nav>
-            <button class="tab-btn active" onclick="switchTab('home', event)">Home</button>
-            <button class="tab-btn" onclick="switchTab('portfolio', event)">Portfolio</button>
-            <button class="tab-btn" onclick="switchTab('about', event)">About Me</button>
-            <button class="tab-btn" onclick="switchTab('contact', event)">Contact</button>
-        </nav>
+        <div class="nav-pill">
+            <div class="brand" onclick="openTab('home')">
+                <span class="brand-dot"></span>
+                <span>NamaAnda.dev</span>
+            </div>
+            <nav>
+                <button class="tab-btn active" data-tab="home" onclick="openTab('home')">Home</button>
+                <button class="tab-btn" data-tab="portfolio" onclick="openTab('portfolio')">Portfolio</button>
+                <button class="tab-btn" data-tab="about" onclick="openTab('about')">About Me</button>
+                <button class="tab-btn" data-tab="contact" onclick="openTab('contact')">Contact</button>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <!-- TAB 1: HOME -->
+        <!-- ================= TAB 1: HOME ================= -->
         <section id="home" class="tab-content active">
-            <div class="hero">
-                <div class="hero-badge">
-                    <span>✨</span> Tersedia untuk Proyek & Kolaborasi
+            <div class="hero-wrapper">
+                <div class="status-badge">
+                    <span class="pulse-dot"></span>
+                    Available for Freelance & Collaboration
                 </div>
-                <h1>Hai, saya Eka Wahyu Maulidan</h1>
-                <p>Aku berfokus pada pengembangan teknologi yang tidak hanya fungsional, tetapi juga menghadirkan pengalaman digital yang menarik dan berdampak.</p>
-                <div class="hero-actions">
-                    <button class="btn btn-primary" onclick="switchTab('portfolio', document.querySelectorAll('.tab-btn')[1])">Lihat Portofolio</button>
-                    <button class="btn btn-outline" onclick="switchTab('contact', document.querySelectorAll('.tab-btn')[3])">Hubungi Saya</button>
+                <p class="hero-greeting">Halo, perkenalkan saya</p>
+                <h1 class="hero-title">Nama Lengkap Anda</h1>
+                <div class="hero-role">Fullstack Web Developer & UI/UX Enthusiast</div>
+                <p class="hero-desc">
+                    Aku berfokus pada pengembangan teknologi yang tidak hanya fungsional, tetapi juga menghadirkan pengalaman digital yang menarik dan berdampak.
+                </p>
+                <div class="hero-cta-group">
+                    <button class="btn-primary" onclick="openTab('portfolio')">
+                        Lihat Portofolio <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button class="btn-secondary" onclick="openTab('about')">
+                        Tentang Saya
+                    </button>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com" target="_blank" class="social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="mailto:email@anda.com" class="social-icon" title="Email"><i class="fa-regular fa-envelope"></i></a>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 2: PORTFOLIO -->
+        <!-- ================= TAB 2: PORTFOLIO ================= -->
         <section id="portfolio" class="tab-content">
-            <div class="section-header">
-                <h2>Portofolio Pilihan</h2>
-                <p>Beberapa proyek terpilih yang pernah saya kembangkan.</p>
+            <div class="section-heading">
+                <span>// Selected Works</span>
+                <h2>Portofolio & Proyek</h2>
             </div>
-            <div class="grid-projects">
+
+            <div class="portfolio-grid">
+                <!-- Proyek 1 -->
                 <div class="project-card">
-                    <h3>Sistem Informasi Akademik</h3>
-                    <p>Platform manajemen data sekolah dengan fitur rekap nilai dan absensi otomatis berbasis web.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">Tailwind</span>
+                    <div class="project-banner">
+                        <i class="fa-solid fa-laptop-code"></i>
                     </div>
-                    <a href="#" class="project-link">Lihat Proyek →</a>
+                    <div class="project-body">
+                        <h3>Website Company Profile Modern</h3>
+                        <p>Platform profil perusahaan interaktif dengan desain responsif, animasi halus, dan optimasi kecepatan akses.</p>
+                        <div class="badge-list">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">Tailwind CSS</span>
+                            <span class="tech-badge">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                            <a href="#"><i class="fa-brands fa-github"></i> Source Code</a>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Proyek 2 -->
                 <div class="project-card">
-                    <h3>Aplikasi E-Commerce UMKM</h3>
-                    <p>Toko online lokal lengkap dengan integrasi keranjang belanja dan manajemen inventaris sederhana.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">PHP</span>
-                        <span class="tech-tag">MySQL</span>
+                    <div class="project-banner">
+                        <i class="fa-solid fa-layer-group"></i>
                     </div>
-                    <a href="#" class="project-link">Lihat Proyek →</a>
+                    <div class="project-body">
+                        <h3>Sistem Manajemen Inventaris</h3>
+                        <p>Aplikasi web untuk memantau stok barang masuk dan keluar secara real-time dilengkapi laporan otomatis.</p>
+                        <div class="badge-list">
+                            <span class="tech-badge">React.js</span>
+                            <span class="tech-badge">Node.js</span>
+                            <span class="tech-badge">MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                            <a href="#"><i class="fa-brands fa-github"></i> Source Code</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 3: ABOUT ME -->
+        <!-- ================= TAB 3: ABOUT ME ================= -->
         <section id="about" class="tab-content">
-            <div class="section-header">
+            <div class="section-heading">
+                <span>// Who Am I</span>
                 <h2>Tentang Saya</h2>
-                <p>Sedikit cerita mengenai latar belakang dan keahlian teknis saya.</p>
             </div>
-            <div class="about-grid">
-                <div class="about-box">
-                    <h3>Latar Belakang</h3>
-                    <p>Saya adalah seorang pengembang web yang antusias mengeksplorasi teknologi baru. Memiliki ketertarikan tinggi pada performa web, antarmuka yang bersih, dan penyelesaian masalah secara efisien.</p>
-                    <p>Selalu terbuka untuk belajar hal baru dan berkolaborasi dalam tim untuk menciptakan solusi digital yang solutif.</p>
+
+            <div class="about-bento">
+                <div class="bento-card">
+                    <h3><i class="fa-solid fa-user-astronaut"></i> Profil Singkat</h3>
+                    <p>
+                        Saya adalah pengembang web yang bersemangat dalam membangun aplikasi modern dari sisi antarmuka pengguna (Frontend) maupun logika sistem (Backend). Saya percaya bahwa kode yang rapi dan desain yang intuitif adalah kunci utama dalam menciptakan produk digital berkualitas.
+                    </p>
+                    <p>
+                        Saat ini saya terus mengasah kemampuan di ekosistem JavaScript modern dan terbuka untuk berbagai peluang kolaborasi maupun proyek lepas.
+                    </p>
                 </div>
-                <div class="about-box">
-                    <h3>Keahlian & Teknologi</h3>
-                    <div class="skills-grid">
-                        <span class="skill-item">HTML / CSS</span>
-                        <span class="skill-item">JavaScript</span>
-                        <span class="skill-item">React.js</span>
-                        <span class="skill-item">Node.js</span>
-                        <span class="skill-item">Git & GitHub</span>
-                        <span class="skill-item">UI/UX Design</span>
+
+                <div class="bento-card">
+                    <h3><i class="fa-solid fa-code"></i> Tech Stack & Keahlian</h3>
+                    <div class="skills-wrapper">
+                        <div class="skill-chip"><i class="fa-brands fa-html5" style="color:#e34f26;"></i> HTML5</div>
+                        <div class="skill-chip"><i class="fa-brands fa-css3-alt" style="color:#1572b6;"></i> CSS3</div>
+                        <div class="skill-chip"><i class="fa-brands fa-js" style="color:#f7df1e;"></i> JavaScript</div>
+                        <div class="skill-chip"><i class="fa-brands fa-react" style="color:#61dafb;"></i> React</div>
+                        <div class="skill-chip"><i class="fa-brands fa-node-js" style="color:#339933;"></i> Node.js</div>
+                        <div class="skill-chip"><i class="fa-brands fa-git-alt" style="color:#f05032;"></i> Git & GitHub</div>
+                        <div class="skill-chip"><i class="fa-brands fa-figma" style="color:#f24e1e;"></i> Figma</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 4: CONTACT -->
+        <!-- ================= TAB 4: CONTACT ================= -->
         <section id="contact" class="tab-content">
-            <div class="section-header">
+            <div class="section-heading">
+                <span>// Get In Touch</span>
                 <h2>Hubungi Saya</h2>
-                <p>Punya pertanyaan atau ingin mengajak kerja sama? Kirimkan pesan melalui form di bawah.</p>
             </div>
-            <div class="contact-container">
-                <form onsubmit="handleFormSubmit(event)">
-                    <div class="form-group">
-                        <label>Nama Lengkap</label>
-                        <input type="text" placeholder="Masukkan nama Anda" required>
+
+            <div class="contact-grid">
+                <div class="contact-info-card">
+                    <div>
+                        <div class="contact-item">
+                            <i class="fa-regular fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>emailanda@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <h4>Lokasi</h4>
+                                <p>Indonesia</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <div>
+                                <h4>WhatsApp</h4>
+                                <p>+62 812-3456-7890</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Alamat Email</label>
-                        <input type="email" placeholder="nama@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Pesan</label>
-                        <textarea rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Kirim Pesan</button>
-                </form>
+                    <p style="font-size: 0.82rem; color: var(--text-secondary);">
+                        Respon cepat dalam 1×24 jam pada hari kerja.
+                    </p>
+                </div>
+
+                <div class="contact-form-card">
+                    <form onsubmit="submitContact(event)">
+                        <div class="input-group">
+                            <label>Nama Anda</label>
+                            <input type="text" placeholder="Masukkan nama lengkap" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="nama@email.com" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Pesan</label>
+                            <textarea rows="4" placeholder="Ceritakan proyek atau pesan Anda..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                            Kirim Pesan <i class="fa-regular fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
 
     <footer>
-        &copy; 2026 Eka Wahyu Maulidan. Dibangun & di-hosting dengan GitHub Pages.
+        <div>&copy; 2026 Nama Lengkap Anda. All rights reserved.</div>
+        <div>Hosted on GitHub Pages</div>
     </footer>
 
     <script>
-        function switchTab(tabId, event) {
-            // Sembunyikan semua tab content
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(c => c.classList.remove('active'));
+        function openTab(tabName) {
+            // Sembunyikan semua tab
+            document.querySelectorAll('.tab-content').forEach(section => {
+                section.classList.remove('active');
+            });
 
-            // Hapus kelas aktif dari semua tombol tab
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(b => b.classList.remove('active'));
+            // Nonaktifkan semua tombol navigasi
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
 
             // Tampilkan tab yang dipilih
-            document.getElementById(tabId).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
 
-            // Aktifkan tombol yang diklik (atau cari berdasarkan event target jika dipicu tombol lain)
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            } else {
-                buttons.forEach(b => {
-                    if(b.getAttribute('onclick').includes(tabId)) {
-                        b.classList.add('active');
-                    }
-                });
-            }
+            // Aktifkan tombol tab yang sesuai
+            const activeBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            // Gulir mulus ke atas saat berpindah tab
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function handleFormSubmit(e) {
+        function submitContact(e) {
             e.preventDefault();
-            alert("Terima kasih! Pesan Anda berhasil dikirim.");
+            alert("Pesan berhasil dikirim! Terima kasih telah menghubungi.");
             e.target.reset();
         }
     </script>
